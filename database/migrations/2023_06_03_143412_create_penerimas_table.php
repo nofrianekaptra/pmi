@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendataans', function (Blueprint $table) {
+        Schema::create('penerimas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kategori_id');
-            $table->enum('status', ['Darah Masuk']);
+            $table->string('nama_penerima');
+            $table->string('nik');
+            $table->string('nohp');
+            $table->string('batas_tgl');
+            $table->string('desk_kondisi');
             $table->integer('qty');
+            $table->enum('status', ['Pending', 'Selesai']);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
-        Schema::dropIfExists('pendataans');
+        Schema::dropIfExists('penerimas');
     }
 };

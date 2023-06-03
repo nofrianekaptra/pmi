@@ -36,7 +36,7 @@
                 <!-- Topbar -->
                 <x-topbar />
                 <!-- End of Topbar -->
-
+                @include('sweetalert::alert')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 

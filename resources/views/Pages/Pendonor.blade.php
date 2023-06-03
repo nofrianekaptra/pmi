@@ -115,7 +115,10 @@
     <script src="{{ asset('jq.js') }}"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
     <script>
-        let table = new DataTable('#myTable');
+        $('#myTable').dataTable({
+            "pageLength": 25
+        });
+
         //button create post event
         $('body').on('click', '#btn-pendonor', function() {
             //open modal

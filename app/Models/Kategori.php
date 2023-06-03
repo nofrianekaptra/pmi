@@ -15,4 +15,9 @@ class Kategori extends Model
     {
         return $this->HasMany(Pendataan::class);
     }
+
+    public function penerimas(): HasMany
+    {
+        return $this->HasMany(Penerima::class);
+    }
 }

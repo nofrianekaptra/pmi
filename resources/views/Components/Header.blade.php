@@ -18,8 +18,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-folder-check"></i> Stok
+                    <a class="nav-link" href="{{ route('index.pasien') }}">
+                        <i class="bi bi-folder-check"></i> Pasien PMI
                     </a>
                 </li>
             </ul>
