@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Models\Pendonor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Kategori;
+use App\Models\Pendataan;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,10 +16,9 @@ class PendonorController extends Controller
      */
     public function index()
     {
-        $p = Pendonor::get();
-
-        $cek_pendonor = Pendonor::where(['user_id' => Auth::id()])->first();
-        return view('Pages.Pendonor', compact('p', 'cek_pendonor'));
+        $pen = Pendataan::get();
+        $cek = User::doesntHave('roles')->where('id', Auth::id())->first();
+        return view('Pages.Pendonor', compact('pen', 'cek'));
     }
 
     /**
@@ -43,15 +42,15 @@ class PendonorController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $pendonor = Pendonor::create([
-            'user_id'       => Auth::id(),
-            'nik'           => $request->nik,
-            'nohp'          => $request->nohp,
-        ]);
+
+        $pendonor = User::find(Auth::id());
+        $pendonor->nik = $request->nik;
+        $pendonor->nohp = $request->nohp;
+        $pendonor->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Data Berhasil Disimpan!',
+            'message' => 'Anda Telah Berhasil Mendaftar, Silahkan Ke Kantor PMI Untuk Lebih Lanjut',
             'data'    => $pendonor
         ]);
     }

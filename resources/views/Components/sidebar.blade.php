@@ -45,9 +45,9 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-home"></i>
+    <li class="nav-item {{ Route::is('laporan.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('laporan.index') }}">
+            <i class="fas fa-fw fa-cogs"></i>
             <span>Data Laporan</span></a>
     </li>
 

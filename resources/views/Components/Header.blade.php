@@ -22,6 +22,13 @@
                         <i class="bi bi-folder-check"></i> Pasien PMI
                     </a>
                 </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('index.historiku') }}">
+                            <i class="bi bi-clock-history"></i> Historiku
+                        </a>
+                    </li>
+                @endauth
             </ul>
             @auth
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
@@ -34,10 +41,6 @@
                             @role('admin')
                                 <li><a class="dropdown-item" href="{{ route('admin.home') }}">Dashboard</a></li>
                             @endrole
-                            <li><a class="dropdown-item" href="#">Setting Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                         </ul>
                     </li>

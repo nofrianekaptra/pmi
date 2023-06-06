@@ -17,7 +17,7 @@
                             <select name="user_id" class="form-control" required>
                                 <option disabled selected>Pilih Pendonor</option>
                                 @foreach ($donor as $pendonor)
-                                    <option value="{{ $pendonor->user_id }}">{{ $pendonor->user->name }}</option>
+                                    <option value="{{ $pendonor->id }}">{{ $pendonor->name }}</option>
                                 @endforeach
                             </select>
                         </div>

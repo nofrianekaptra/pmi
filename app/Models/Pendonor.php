@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pendonor extends Model
 {
@@ -19,5 +20,15 @@ class Pendonor extends Model
     public function user(): BelongsTo
     {
         return $this->BelongsTo(User::class);
+    }
+
+    public function pendataans(): HasMany
+    {
+        return $this->HasMany(Pendataan::class);
+    }
+
+    public function scopeUserlog($query)
+    {
+        return $query->where('user_id', Auth::id());
     }
 }

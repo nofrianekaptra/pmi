@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PendataanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\user\PendonorController;
 use App\Http\Controllers\user\userHomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [userHomeController::class, 'index'])->name('index');
 Route::resource('pendonor', PendonorController::class);
 Route::get('pasien-pmi', [userHomeController::class, 'pasien'])->name('index.pasien');
+Route::get('historiku', [userHomeController::class, 'historiku'])->name('index.historiku');
 
 Route::get('login', [AuthController::class, 'showlogin'])->name('formLogin');
 Route::post('login', [AuthController::class, 'login'])->name('loginOn');
@@ -47,6 +49,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('master-web')->group(function 
         Route::get('pendataan/darah-keluar', 'darahKeluar')->name('pendataan.darahkeluar');
         Route::post('pendataan/darah-keluar/store', 'store_dklr')->name('pendataan.darahkeluarstore');
         Route::get('pendataan/darah-keluar/store/{penerima:id}/endproses', 'store_dklr_endproses')->name('pendataan.darahkeluarstoreendproses');
+    });
+
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('laporan', 'index')->name('laporan.index');
+        Route::get('laporan/darah-masuk/tahunan', 'darahmasuk_tahunan')->name('laporan.dmt');
+        Route::get('laporan/darah-masuk/bulanan', 'darahmasuk_bulanan')->name('laporan.dmb');
+        Route::get('laporan/darah-keluar/tahunan', 'darahkeluar_tahunan')->name('laporan.dkt');
+        Route::get('laporan/darah-keluar/bulanan', 'darahkeluar_bulanan')->name('laporan.dkb');
     });
 });
 

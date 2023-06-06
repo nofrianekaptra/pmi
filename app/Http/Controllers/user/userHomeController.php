@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
 use App\Models\Kategori;
+use App\Models\Pendonor;
 use App\Models\Penerima;
+use App\Models\Pendataan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class userHomeController extends Controller
 {
@@ -20,5 +23,11 @@ class userHomeController extends Controller
     {
         $pen = Penerima::get();
         return view('Pages.Pasien', compact('pen'));
+    }
+
+    public function historiku()
+    {
+        $pen = Pendataan::where('user_id', Auth::id())->get();
+        return view('Pages.Histori', compact('pen'));
     }
 }

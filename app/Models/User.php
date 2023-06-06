@@ -52,9 +52,4 @@ class User extends Authenticatable
     {
         return $this->HasMany(Pendonor::class);
     }
-
-    public function pendataans(): HasMany
-    {
-        return $this->HasMany(Pendataan::class);
-    }
 }

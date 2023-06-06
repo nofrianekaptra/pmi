@@ -8,6 +8,7 @@ use App\Models\Penerima;
 use App\Models\Pendataan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,7 +24,7 @@ class PendataanController extends Controller
 
     public function darahMasuk()
     {
-        $donor = Pendonor::get();
+        $donor = User::doesntHave('roles')->get();
         $kat = Kategori::get();
         return view('Admin.Pendataan.Pendataan_masuk', compact('donor', 'kat'));
     }

@@ -19,24 +19,19 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12">
-                @if ($cek_pendonor)
-                    <div class="alert alert-danger border-0 shadow-sm" role="alert">
-                        <b><i class="bi bi-info-circle"></i> INFORMASI</b> : Anda Telah Terdaftar Sebagai Pendonor,
-                        Terimakasih Atas Kerjasamanya.
-                    </div>
-                @else
-                    @auth
+                @auth
+                    @empty($cek->nik)
                         <div class="mb-3">
                             <button type="submit" class="btn btn-danger" id="btn-pendonor">Daftar Sebagai Pendonor</button>
                         </div>
-                    @endauth
-                    @guest
-                        <div class="alert alert-danger border-0 shadow-sm" role="alert">
-                            <b><i class="bi bi-info-circle"></i> INFORMASI</b> : Anda belum login , klik <a
-                                href="{{ route('formLogin') }}">Login</a> Untuk melanjutkan
-                        </div>
-                    @endguest
-                @endif
+                    @endempty
+                @endauth
+                @guest
+                    <div class="alert alert-danger border-0 shadow-sm" role="alert">
+                        <b><i class="bi bi-info-circle"></i> INFORMASI</b> : Anda belum login , klik <a
+                            href="{{ route('formLogin') }}">Login</a> Untuk melanjutkan
+                    </div>
+                @endguest
                 <div class="card border-danger">
                     <div class="card-body p-5">
                         <table class="table" id="myTable">
@@ -49,12 +44,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($p as $pendonor)
-                                    <tr id="index_{{ $pendonor->id }}">
+                                @foreach ($pen as $pendataan)
+                                    <tr id="index_{{ $pendataan->id }}">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ Str::of($pendonor->nik)->limit(5, ' (...)') }}</td>
-                                        <td>{{ $pendonor->user->name }}</td>
-                                        <td>{{ Str::of($pendonor->nohp)->limit(5, ' (...)') }}</td>
+                                        <td>{{ Str::of($pendataan->user->nik)->limit(5, ' (...)') }}</td>
+                                        <td>{{ $pendataan->user->name }}</td>
+                                        <td>{{ Str::of($pendataan->user->nohp)->limit(5, ' (...)') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -118,7 +113,6 @@
         $('#myTable').dataTable({
             "pageLength": 25
         });
-
         //button create post event
         $('body').on('click', '#btn-pendonor', function() {
             //open modal
