@@ -3,7 +3,7 @@
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="mb-3">
                 <a href="{{ route('pendataan.darahmasuk') }}" class="btn btn-danger">Keola Pendataan Darah Masuk</a>
@@ -48,9 +48,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="row">
         <div class="col-md-12">
+            <div class="mb-3">
+                <a href="{{ route('pendataan.darahkeluar') }}" class="btn btn-danger">Keola Pendataan Darah Keluar</a>
+            </div>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-danger">DataTables Pendataan Keluar</h6>
@@ -61,6 +64,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>No Hp</th>
                                     <th>Nama Penerima</th>
                                     <th>Golongan Darah</th>
                                     <th>Qty ( Darah DiButuhkan )</th>
@@ -72,6 +76,7 @@
                                 @foreach ($pen as $penerima)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $penerima->nohp }}</td>
                                         <td>{{ $penerima->nama_penerima }}</td>
                                         <td>{{ $penerima->kategori->jenis_d }}</td>
                                         <td>{{ $penerima->qty }}</td>
@@ -87,13 +92,16 @@
                                             @endif
                                         </td>
                                         <td class="d-flex justify-content-start align-middle">
-                                            <a href="" class="btn btn-outline-danger btn-sm ">Detail</a>
-                                            <a href="" class="btn btn-dark btn-sm mx-2">Edit</a>
-                                            <form action="" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                            </form>
+                                            @if ($penerima->status == 'Pending')
+                                                <a href="{{ route('pendataan.pedit', $penerima->id) }}"
+                                                    class="btn btn-dark btn-sm mx-2">Edit</a>
+                                                <form action="{{ route('pendataan.pdelete', $penerima->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function pendonor()
     {
-        return view('Admin.Laporan.Index');
+        return view('Admin.Laporan.Pendonor');
+    }
+
+    public function penerima()
+    {
+        return view('Admin.Laporan.Penerima');
     }
 
     public function darahmasuk_tahunan(Request $request)

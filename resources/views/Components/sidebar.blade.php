@@ -27,7 +27,7 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ Route::is('kategori.*', 'pendataan.*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Route::is('kategori.*', 'pendataan.*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -43,12 +43,36 @@
                     href="{{ route('pendataan.index') }}">Pendataan Stok</a>
             </div>
         </div>
+    </li> --}}
+
+    <li class="nav-item {{ Route::is('kategori.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('kategori.index') }}">
+            <i class="fas fa-fw fa-hand-holding-medical"></i>
+            <span>Kategori Gol. Darah</span></a>
     </li>
 
-    <li class="nav-item {{ Route::is('laporan.*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('laporan.index') }}">
-            <i class="fas fa-fw fa-cogs"></i>
-            <span>Data Laporan</span></a>
+    <li class="nav-item {{ Route::is('pendataan.pendonor') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pendataan.pendonor') }}">
+            <i class="fas fa-fw fa-syringe"></i>
+            <span>Darah Masuk (Pendonor)</span></a>
+    </li>
+
+    <li class="nav-item {{ Route::is('pendataan.penerima') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pendataan.penerima') }}">
+            <i class="fas fa-fw fa-stethoscope"></i>
+            <span>Darah Keluar (Penerima)</span></a>
+    </li>
+
+    <li class="nav-item {{ Route::is('laporan.pendonor') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('laporan.pendonor') }}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Data Laporan Pendonor</span></a>
+    </li>
+
+    <li class="nav-item {{ Route::is('laporan.penerima') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('laporan.penerima') }}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Data Laporan Penerima</span></a>
     </li>
 
 
